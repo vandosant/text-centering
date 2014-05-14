@@ -23,4 +23,26 @@ this is a really long line that has a lot of characters
 
     expect(actual).to eq expected
   end
+
+  let :spaced_string do
+    <<-INPUT
+     this is a short line
+this is a really long line that has a lot of characters
+and this is
+   short
+    INPUT
+  end
+
+  it 'ignores leading whitespace' do
+    actual = TextCentering.parse(spaced_string)
+
+    expected = <<-INPUT
+                 this is a short line
+this is a really long line that has a lot of characters
+                      and this is
+                         short
+    INPUT
+
+    expect(actual).to eq expected
+  end
 end
